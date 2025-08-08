@@ -1,13 +1,13 @@
 # Docker Practical Task
 
-This practical task is a part of the `Module 10: Artifact Management: Nexus` of the `Internship: DevOps` course.
+This practical task is a part of the `Module 11: Containerization: Docker` of the `Internship: DevOps` course.
 
 This project is forked from: https://github.com/spring-projects/spring-petclinic. 
 
 ## Tasks
 
 ### 1. Fork the repository
-* ttps://github.com/spring-projects/spring-petclinic
+* https://github.com/spring-projects/spring-petclinic
 
 ### 2. Create Dockerfile for spring-petclinic application using pre-built artifact
 * Build application outside of container
