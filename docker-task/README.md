@@ -28,3 +28,5 @@ This project is forked from: https://github.com/spring-projects/spring-petclinic
 ### 4. Create docker-compose configuration that will automatically start multiple containers
 * Run two containers: application + DB
 * Provide credentials as environment variables, so that DB image can be configured with custom credentials and application can connect to DB automatically.
+    * Run `cd docker-task/4`
+    * Run `docker-compose up`

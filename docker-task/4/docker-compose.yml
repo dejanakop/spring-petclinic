@@ -1,0 +1,11 @@
+services:
+  mysql:
+    image: mysql
+    ports:
+      - 33060:33060
+    environment:
+      - MYSQL_ROOT_PASSWORD=db_pass123
+  spring-petclinic:
+    image: spring-petclinic:2
+    ports:
+      - 8080:8080
