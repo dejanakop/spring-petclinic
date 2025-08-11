@@ -11,7 +11,12 @@ This project is forked from: https://github.com/spring-projects/spring-petclinic
 
 ### 2. Create Dockerfile for spring-petclinic application using pre-built artifact
 * Build application outside of container
+    * `./gradlew build`
+    * `cp build/libs/[name].jar docker-task/2/[name].jar`
 * Copy artifact from target folder into image and make it work inside container
+    * See Dockerfile
+    * `docker build -t spring-petclinic .`
+    * `docker run -p 8080:8080 spring-petclinic`
 
 ### 3. Create multi-stage Dockerfile for spring-petclinic application
 * Application should be built as a part of the first stage
