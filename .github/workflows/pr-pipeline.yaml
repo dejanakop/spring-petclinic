@@ -1,0 +1,21 @@
+name: PR Pipeline
+
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+
+  staticAnalysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+      - name: Sey Up JDK17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Static analysis
+        run: ./gradlew staticAnalysis
