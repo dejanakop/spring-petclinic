@@ -21,7 +21,7 @@ jobs:
           if [[ $? -ne 0 ]]; then
             current_tag="v0.0.0"
           fi
-          echo "tag=$current_tag" >> $GITHUB_OUTPUT
+          echo "tag=${current_tag}" >> $GITHUB_OUTPUT
 
       - name: Checking
         run: echo ${{ steps.current_verison.outputs.tag }} 
