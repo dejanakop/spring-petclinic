@@ -17,7 +17,7 @@ jobs:
       - name: Get Current Version
         id: current_version
         run: |
-          current_tag=$( git describe --tags --abbrev=0 2> /dev/null || "" )
+          current_tag=$( git describe --tags --abbrev=0 2> /dev/null || echo "" )
           if [[ -z "${current_tag}" ]]; then
             current_tag="v0.0.0"
           fi
