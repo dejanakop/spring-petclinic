@@ -9,6 +9,8 @@ jobs:
 
   version:
     runs-on: ubuntu-latest
+    outputs:
+      NEW_TAG: ${{ steps.new_version.outputs.new_tag }}
     steps:
 
       - name: Checkout Code
@@ -32,4 +34,8 @@ jobs:
           patch=$( echo $current_tag | sed "s/v[0-9]*[.][0-9]*[.]//" )
           minor=$((minor + 1))
           new_tag="v${major}.${minor}.${patch}"
-          echo "new_tag=${new_tag}"
+          echo "new_tag=${new_tag}" >> $GITHUB_OUTPUT
+
+      - name: Add Tag
+        run: |
+          git tag "${{ steps.new_version.outputs.new_tag }}"
