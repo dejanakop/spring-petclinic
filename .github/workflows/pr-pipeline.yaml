@@ -51,3 +51,24 @@ jobs:
             name: Tests Report
             path: build/reports/tests/tests.html
           
+  build:
+      runs-on: ubuntu-latest
+      steps:
+      
+        - name: Checkout Code
+          uses: actions/checkout@v5
+          
+        - name: Sey Up JDK17
+          uses: actions/setup-java@v5
+          with:
+            distribution: temurin
+            java-version: 17
+            
+        - name: Build
+          run: ./gradlew build -x checkstyleMain -x test
+          
+        - name: Save .jar file
+          uses: actions/upload-artifact@v4
+          with:
+            name: Spring Petclinic JAR
+            path: build/libs/*.jar
