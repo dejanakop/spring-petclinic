@@ -38,4 +38,6 @@ jobs:
 
       - name: Add Tag
         run: |
-          git tag "${{ steps.new_version.outputs.new_tag }}"
+          tag="${{ steps.new_version.outputs.new_tag }}"
+          git tag $tag
+          git push origin $tag
