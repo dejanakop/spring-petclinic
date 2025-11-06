@@ -21,7 +21,7 @@ jobs:
           if [[ "${current_tag}" == "" ]]; then
             current_tag="v0.0.0"
           fi
-          echo "tag=${current_tag}" >> $GITHUB_OUTPUT
+          echo "current_tag=${current_tag}" >> $GITHUB_OUTPUT
 
       - name: Get Next Version
         id: next_version
