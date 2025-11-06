@@ -97,11 +97,6 @@ jobs:
           image-ref: spring-petclinic:${{ github.sha }}
           format: 'table'
 
-  pushToRegistry:
-    needs: [ "dockerImage" ]
-    runs-on: ubuntu-latest
-    steps:
-
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v1
         with:
