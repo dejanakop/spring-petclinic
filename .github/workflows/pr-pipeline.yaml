@@ -10,12 +10,22 @@ jobs:
   staticAnalysis:
     runs-on: ubuntu-latest
     steps:
+    
       - name: Checkout Code
         uses: actions/checkout@v5
+        
       - name: Sey Up JDK17
         uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 17
+          
       - name: Static analysis
         run: ./gradlew checkstyleMain
+        
+      - name: Save Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Static Analysis Report
+          path: build/reports/checkstyle/checkstyle.xml
+          
