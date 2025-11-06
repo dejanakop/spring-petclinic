@@ -21,3 +21,10 @@ jobs:
 
       - name: Install semver
         run: pip install semver
+
+      - name: Get new version
+        id: new_version
+        run: echo "tag=$(python new_version.py)" >> $GITHUB_OUTPUT
+
+      - name: Checking
+        run: echo ${{ steps.new_verison.outputs.tag }} 
