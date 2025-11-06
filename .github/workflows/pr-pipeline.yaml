@@ -49,5 +49,5 @@ jobs:
           uses: actions/upload-artifact@v4
           with:
             name: Tests Report
-            path: build/reports/checkstyle/tests.html
+            path: build/reports/tests/tests.html
           
