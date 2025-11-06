@@ -26,4 +26,10 @@ jobs:
       - name: Get Next Version
         id: next_version
         run: |
-          echo "${{ steps.current_version.outputs.current_tag }}"
+          current_tag="${{ steps.current_version.outputs.current_tag }}"
+          major=$( echo $current_tag | sed "s/[.][0-9]*[.][0-9]*//" | sed "s/v//" )
+          minor=$( echo $current_tag | sed "s/v[0-9]*[.]//" | sed "s/[.][0-9]*//" )
+          patch=$( echo $current_tag | sed "s/v[0-9]*[.][0-9]*[.]//" )
+          minor=$( minor + 1 )
+          new_tag="v${major}.${minor}.${patch}"
+          echo "new_tag=${new_tag}"
