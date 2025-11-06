@@ -1,0 +1,23 @@
+name: Main Branch Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+
+  version:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v5
+    
+      - name: Install Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.15"
+
+      - name: Install semver
+        run: pip install semver
