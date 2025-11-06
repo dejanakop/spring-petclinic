@@ -1,3 +1,5 @@
+import org.gradle.api.plugins.quality.Checkstyle
+
 plugins {
   id 'java'
   id 'checkstyle'
@@ -69,9 +71,12 @@ tasks.named('test') {
 checkstyle {
   configDirectory = project.file('src/checkstyle')
   configFile = file('src/checkstyle/nohttp-checkstyle.xml')
+}
+
+tasks.withType(Checkstyle).configureEach {
   reports {
     html.required = true
-    html.destination = file('**/build/reports/checkstyle/checkstyle.html')
+    html.outputLocation = file("build/reports/checkstyle/checkstyle.html")
   }
 }
 
