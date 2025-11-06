@@ -66,6 +66,10 @@ dependencies {
 
 tasks.named('test') {
   useJUnitPlatform()
+  reports {
+    html.required = true
+    html.outputLocation = file("build/reports/tests/tests.html")
+  }
 }
 
 checkstyle {
