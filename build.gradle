@@ -68,7 +68,7 @@ tasks.named('test') {
 
 checkstyle {
   configDirectory = project.file('src/checkstyle')
-  configFile = file('src/checkstyle/checkstyle.xml')
+  configFile = file('src/checkstyle/nohttp-checkstyle.xml')
 }
 
 tasks.withType(JavaCompile).configureEach {
