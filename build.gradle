@@ -68,12 +68,7 @@ tasks.named('test') {
 
 checkstyle {
   configDirectory = project.file('src/checkstyle')
-  configFile = file('src/checkstyle/nohttp-checkstyle.xml')
-}
-
-checkstyleNohttp {
-  configDirectory = project.file('src/checkstyle')
-  configFile = file('src/checkstyle/nohttp-checkstyle.xml')
+  configFile = file('src/checkstyle/checkstyle.xml')
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -92,10 +87,8 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 tasks.named("formatMain").configure { dependsOn("checkstyleMain") }
-tasks.named("formatMain").configure { dependsOn("checkstyleNohttp") }
 
 tasks.named("formatTest").configure { dependsOn("checkstyleTest") }
-tasks.named("formatTest").configure { dependsOn("checkstyleNohttp") }
 
 checkstyleAot.enabled = false
 checkstyleAotTest.enabled = false
