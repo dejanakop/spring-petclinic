@@ -1,11 +1,7 @@
 import subprocess
 
 def get_current_tag():
-  try:
-    tag = subprocess.check_output(["git", "describe", "--tags", "--abbrev=0"]).decode()
-  except subprocess.CalledProcessError as e:
-    tag = "0.0.0"
-  return tag
+    return subprocess.run(["bash", "get_current_tag.sh"], capture_output=True, text=True)
 
 if __name__ == "__main__":
 
