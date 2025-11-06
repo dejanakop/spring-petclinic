@@ -89,4 +89,11 @@ jobs:
           path: ./petclinic.jar
 
       - name: Build Docker Image
-        run: docker build -t spring-petclinic:latest .
+        run: docker build -t spring-petclinic:${{ github.sha }} .
+
+      - name: Trivy Scan
+        uses: aquasecurity/trivy-action@v0.33.1
+        with:
+          image-ref: petclinic:${{ github.sha }}
+          format: 'table'
+          exit-code: '1'
