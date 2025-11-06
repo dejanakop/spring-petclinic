@@ -69,6 +69,10 @@ tasks.named('test') {
 checkstyle {
   configDirectory = project.file('src/checkstyle')
   configFile = file('src/checkstyle/nohttp-checkstyle.xml')
+  reports {
+    html.required = true
+    html.destination = file('**/build/reports/checkstyle/checkstyle.html')
+  }
 }
 
 checkstyleNohttp {
