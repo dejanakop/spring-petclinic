@@ -18,7 +18,7 @@ jobs:
         id: current_version
         run: |
           current_tag=$( git describe --tags --abbrev=0 2> /dev/null || echo "" )
-          if [[ -z "${current_tag}" ]]; then
+          if [[ "${current_tag}" == "" ]]; then
             current_tag="v0.0.0"
           fi
           echo "tag=${current_tag}" >> $GITHUB_OUTPUT
