@@ -19,7 +19,7 @@ jobs:
       - name: Get Current Version
         id: current_version
         run: |
-          current_tag=$( git describe --tags --abbrev=0 2> /dev/null || echo "" )
+          current_tag=$( (git ls-remote --tags --sort=v:refname origin | tail -1 | awk -F/ '{print $3}') || echo "" )
           if [[ "${current_tag}" == "" ]]; then
             current_tag="v0.0.0"
           fi
