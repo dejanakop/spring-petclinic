@@ -1,0 +1,13 @@
+petclinic:
+
+  name: spring-petclinic
+
+  deployment:
+    replicas: 3
+    image: dejanakop/spring-petclinic-main:13d63d2
+    containerPort: 8080
+
+  service:
+    type: LoadBalancer
+    port: 80
+    targetPort: 8080
