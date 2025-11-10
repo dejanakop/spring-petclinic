@@ -53,4 +53,5 @@ jobs:
 
       - name: Get Application Link
         run: |
-          kubectl get svc ${{ secrets.SVC_NAME }} | grep "LoadBalancer" | awk '{ print $4 }'
+          ip=$( kubectl get svc ${{ secrets.SVC_NAME }} | grep "LoadBalancer" | awk '{ print $4 }' )
+          echo "http://${ip}:80"
