@@ -1,0 +1,52 @@
+name: Deploy App
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - 'dev'
+          - 'qa'
+          - 'production'
+
+jobs:
+
+  deploy_petclinic:
+
+    runs-on: ubuntu-latest
+    steps:
+  
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Authenticate
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+  
+      - name: Gcloud Setup
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.PROJECT }}
+
+      - name: Configure GKE credentials
+        run: |
+          gcloud container clusters get-credentials ${{ secrets.CLUSTER_NAME }} --zone ${{ secrets.ZONE }}
+
+      - name: Install kubectl
+        run: gcloud components install kubectl
+
+      - name: Install unzip
+        run: sudo apt-get update && sudo apt-get install -y unzip
+
+      - name: Install Helm
+        run: |
+          wget https://get.helm.sh/helm-v3.13.0-linux-amd64.tar.gz -O helm.tar.gz
+          tar -zxvf helm.tar.gz
+          sudo mv linux-amd64/helm /usr/local/bin/helm
+      
+      - name: Install Chart
+        run: helm upgrade --install petclinic ./helm/petclinic
