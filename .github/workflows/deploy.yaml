@@ -50,3 +50,6 @@ jobs:
       
       - name: Install Chart
         run: helm upgrade --install petclinic ./helm/petclinic
+
+      - name: Get Application Link
+        run: kubectl get svc ${{ secrets.SVC_NAME }}
