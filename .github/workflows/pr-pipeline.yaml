@@ -14,15 +14,15 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v5
         
-      - name: Sey Up JDK17
+      - name: Sey Up JDK25
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: 17
+          java-version: 25
           
       - name: Static analysis
         run: |
-          export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+          export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64
           ./gradlew checkstyleMain
         
       - name: Save Report
@@ -38,15 +38,15 @@ jobs:
         - name: Checkout Code
           uses: actions/checkout@v5
           
-        - name: Sey Up JDK17
+        - name: Sey Up JDK25
           uses: actions/setup-java@v5
           with:
             distribution: temurin
-            java-version: 17
+            java-version: 25
             
         - name: Run Tests
           run: |
-            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+            export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64
             ./gradlew test
           
         - name: Save Report
@@ -63,15 +63,15 @@ jobs:
         - name: Checkout Code
           uses: actions/checkout@v5
           
-        - name: Sey Up JDK17
+        - name: Sey Up JDK25
           uses: actions/setup-java@v5
           with:
             distribution: temurin
-            java-version: 17
+            java-version: 25
             
         - name: Build
           run: |
-            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+            export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64
             ./gradlew build -x checkstyleMain -x test
           
         - name: Save .jar file
