@@ -8,7 +8,7 @@ on:
 jobs:
 
   staticAnalysis:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     
       - name: Checkout Code
@@ -30,7 +30,7 @@ jobs:
           path: build/reports/checkstyle/checkstyle.html
 
   runTests:
-      runs-on: ubuntu-latest
+      runs-on: self-hosted
       steps:
       
         - name: Checkout Code
@@ -53,7 +53,7 @@ jobs:
           
   build:
       needs: [ "staticAnalysis", "runTests" ]
-      runs-on: ubuntu-latest
+      runs-on: self-hosted
       steps:
       
         - name: Checkout Code
@@ -76,7 +76,7 @@ jobs:
 
   dockerImage:
     needs: [ "build" ]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
 
       - name: Checkout Code
