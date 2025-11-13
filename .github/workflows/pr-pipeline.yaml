@@ -21,7 +21,9 @@ jobs:
           java-version: 17
           
       - name: Static analysis
-        run: ./gradlew checkstyleMain
+        run: |
+          export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+          ./gradlew checkstyleMain
         
       - name: Save Report
         uses: actions/upload-artifact@v4
@@ -43,7 +45,9 @@ jobs:
             java-version: 17
             
         - name: Run Tests
-          run: ./gradlew test
+          run: |
+            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+            ./gradlew test
           
         - name: Save Report
           uses: actions/upload-artifact@v4
@@ -66,7 +70,9 @@ jobs:
             java-version: 17
             
         - name: Build
-          run: ./gradlew build -x checkstyleMain -x test
+          run: |
+            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+            ./gradlew build -x checkstyleMain -x test
           
         - name: Save .jar file
           uses: actions/upload-artifact@v4
