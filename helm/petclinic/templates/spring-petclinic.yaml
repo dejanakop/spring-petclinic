@@ -20,9 +20,9 @@ spec:
             - containerPort: {{ .Values.petclinic.deployment.containerPort }}
           readinessProbe:
             httpGet:
-              path: /ready
+              path: /actuator/health/readiness
               port: 8080
-            initialDelaySeconds: 5
+            initialDelaySeconds: 60
             periodSeconds: 10
             timeoutSeconds: 1
             successThreshold: 1
