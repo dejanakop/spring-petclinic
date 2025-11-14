@@ -50,9 +50,7 @@ jobs:
       
       - name: Install Chart
         run: |
-          helm repo add Platform9-Community https://platform9-community.github.io/helm-charts
-          helm repo update
-          helm upgrade --install petclinic Platform9-Community/spring-petclinic-cloud
+          helm upgrade --install petclinic ./helm/petclinic/
 
       - name: Get Application Link
         run: |
