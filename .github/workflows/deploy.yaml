@@ -49,7 +49,10 @@ jobs:
           sudo mv linux-amd64/helm /usr/local/bin/helm
       
       - name: Install Chart
-        run: helm upgrade --install petclinic ./helm/petclinic
+        run: |
+          helm repo add Platform9-Community https://platform9-community.github.io/helm-charts
+          helm repo update
+          helm upgrade --install petclinic Platform9-Community/spring-petclinic-cloud
 
       - name: Get Application Link
         run: |
