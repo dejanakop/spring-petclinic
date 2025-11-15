@@ -126,11 +126,11 @@ jobs:
       - name: Build Docker Image
         run: docker build -t spring-petclinic:${{ needs.version.outputs.NEW_TAG }} .
 
-      # - name: Trivy Scan
-      #   uses: aquasecurity/trivy-action@0.28.0
-      #   with:
-      #     image-ref: spring-petclinic:${{ needs.version.outputs.NEW_TAG }}
-      #     format: 'table'
+      - name: Trivy Scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: spring-petclinic:${{ needs.version.outputs.NEW_TAG }}
+          format: 'table'
 
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v1
