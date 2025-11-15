@@ -49,9 +49,13 @@ jobs:
       
       - name: Install Chart
         run: |
-          helm upgrade --install petclinic ./helm/petclinic/
+          helm upgrade --install petclinic ./helm/petclinic/ \
+            --set deployment.image=${{ vars.IMAGE }}
 
       - name: Get Application Link
         run: |
           ip=$( kubectl get svc ${{ secrets.SVC_NAME }} | grep "LoadBalancer" | awk '{ print $4 }' )
+          while [[ $ip == "<pending>" ]]; do
+            ip=$( kubectl get svc ${{ secrets.SVC_NAME }} | grep "LoadBalancer" | awk '{ print $4 }' )
+          done
           echo "http://${ip}:80"
