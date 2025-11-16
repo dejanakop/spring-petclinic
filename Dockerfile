@@ -1,6 +1,6 @@
 FROM eclipse-temurin:17-jre
 
-COPY ./petclinic.jar /app/petclinic.jar
+COPY *.jar /app/petclinic.jar
 COPY jmx.jar /app/jmx.jar
 COPY config.yaml /app/config.yaml
 
