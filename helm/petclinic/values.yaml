@@ -3,6 +3,7 @@ app:
 
 deployment:
   name: spring-petclinic-deployment
+  image: ""
   replicas: 3
   containerPort: 8080
 
