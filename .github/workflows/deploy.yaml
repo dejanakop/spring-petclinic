@@ -21,6 +21,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      - name: Get Git Tag
+        id: get_tag
+        run: |
+          tag=$( (git ls-remote --tags --sort=v:refname origin | tail -1 | awk -F/ '{print $3}') || echo "" )
+          if [[ "${tag}" == "" ]]; then
+            exit 1
+          fi
+          echo "tag=${current_tag}" >> $GITHUB_OUTPUT
+
       - name: Authenticate
         uses: google-github-actions/auth@v2
         with:
@@ -49,8 +58,13 @@ jobs:
       
       - name: Install Chart
         run: |
+          if [[ ${{ github.event.inputs.environment }} == "production" ]]; then
+            IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.MAIN_REPO }}/spring-petclinic:${{ needs.version.outputs.tag }}"
+          else
+            IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:${{ needs.version.outputs.tag }}"
+          fi
           helm upgrade --install petclinic ./helm/petclinic/ \
-            --set deployment.image=${{ vars.IMAGE }}
+            --set deployment.image=$IMAGE
 
       - name: Get Application Link
         run: |
