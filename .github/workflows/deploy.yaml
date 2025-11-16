@@ -58,7 +58,7 @@ jobs:
       
       - name: Install Chart
         run: |
-          if [[ ${{ github.event.inputs.environment }} == "production" ]]; then
+          if [[ "${{ github.event.inputs.environment }}" == "production" ]]; then
             IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.MAIN_REPO }}/spring-petclinic:${{ needs.version.outputs.tag }}"
           else
             IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:${{ needs.version.outputs.tag }}"
