@@ -28,7 +28,7 @@ jobs:
           if [[ "${tag}" == "" ]]; then
             exit 1
           fi
-          echo "tag=${current_tag}" >> $GITHUB_OUTPUT
+          echo "tag=${tag}" >> $GITHUB_OUTPUT
 
       - name: Authenticate
         uses: google-github-actions/auth@v2
