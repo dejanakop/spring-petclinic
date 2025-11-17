@@ -41,6 +41,18 @@
     <spring-format.version>0.0.47</spring-format.version>
   </properties>
 
+  <!-- Add Spring Cloud GCP Dependency BOM -->
+  <dependencyManagement>
+      <dependencies>
+        <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>spring-cloud-gcp-dependencies</artifactId>
+        <version>4.1.4</version>
+        <type>pom</type>
+        <scope>import</scope>
+        </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <!-- Spring and Spring Boot dependencies -->
     <dependency>
@@ -93,6 +105,10 @@
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>spring-cloud-gcp-starter-sql-mysql</artifactId>
     </dependency>
 
     <!-- Caching -->
