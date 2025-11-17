@@ -104,10 +104,6 @@ tasks.withType(JavaCompile).configureEach {
   }
 }
 
-tasks.withType(Test) {
-    systemProperty "spring.test.aot.enabled", "false"
-}
-
 tasks.named("formatMain").configure { dependsOn("checkstyleMain") }
 tasks.named("formatMain").configure { dependsOn("checkstyleNohttp") }
 
