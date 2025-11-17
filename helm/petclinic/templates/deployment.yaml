@@ -29,3 +29,10 @@ spec:
               containerPort: {{ .Values.deployment.containerPort }}
             - name: jmx-port
               containerPort: {{ .Values.jmx_service.targetPort }}
+          env:
+            - name: DB_HOST
+              value: {{ .Values.db.host }}
+            - name: DB_USER
+              value: {{ .Values.db.user }}
+            - name: DB_PASSWORD
+              value: {{ .Values.db.password }}

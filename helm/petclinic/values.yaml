@@ -24,3 +24,8 @@ jmx_service:
   path: "/metrics"
   mountPath: "/app/config.yaml"
   subPath: "config.yaml"
+
+db:
+  host: ""
+  user: ""
+  password: ""
