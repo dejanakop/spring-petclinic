@@ -65,7 +65,8 @@ jobs:
             --set deployment.image=$IMAGE \
             --set db.host=${{ secrets.DB_HOST }} \
             --set db.user=${{ secrets.DB_USER }} \
-            --set db.password=${{ secrets.DB_PASSWORD }}
+            --set db.password=${{ secrets.DB_PASSWORD }} \
+            --set db.name=${{ secrets.DB_NAME }}
 
       - name: Get Application Link
         run: |

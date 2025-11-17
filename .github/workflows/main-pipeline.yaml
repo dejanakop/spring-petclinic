@@ -78,7 +78,12 @@ jobs:
           java-version: 17
           
       - name: Run Tests
-        run: ./gradlew test
+        run: |
+          ./gradlew test \
+          -MYSQL_DB_URL=${{ secrets.DB_HOST }} \
+          -MYSQL_DB_NAME=${{ secrets.DB_NAME }} \
+          -MYSQL_USER=${{ secrets.DB_USER }} \
+          -MYSQL_PASSWORD=${{ secrets.DB_PASSWORD }}
         
       - name: Save Report
         uses: actions/upload-artifact@v4
@@ -101,7 +106,12 @@ jobs:
           java-version: 17
           
       - name: Build
-        run: ./gradlew build -x checkstyleMain -x test
+        run: |
+          ./gradlew build -x checkstyleMain -x test \
+          -MYSQL_DB_URL=${{ secrets.DB_HOST }} \
+          -MYSQL_DB_NAME=${{ secrets.DB_NAME }} \
+          -MYSQL_USER=${{ secrets.DB_USER }} \
+          -MYSQL_PASSWORD=${{ secrets.DB_PASSWORD }}
         
       - name: Save .jar file
         uses: actions/upload-artifact@v4
