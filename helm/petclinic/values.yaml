@@ -26,6 +26,7 @@ jmx_service:
   subPath: "config.yaml"
 
 db:
+  name: ""
   host: ""
   user: ""
   password: ""

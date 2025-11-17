@@ -30,6 +30,8 @@ spec:
             - name: jmx-port
               containerPort: {{ .Values.jmx_service.targetPort }}
           env:
+            - name: MYSQL_DB_NAME
+              value: {{ .Values.db.name }}
             - name: MYSQL_DB_URL
               value: {{ .Values.db.host }}
             - name: MYSQL_USER
