@@ -87,7 +87,7 @@ jobs:
   #         path: build/reports/tests/tests.html
           
   build:
-    needs: [ "staticAnalysis", "runTests" ]
+    needs: [ "staticAnalysis" ]
     runs-on: self-hosted
     steps:
     
