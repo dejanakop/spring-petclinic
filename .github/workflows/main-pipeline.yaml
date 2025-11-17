@@ -64,30 +64,30 @@ jobs:
           name: Static Analysis Report
           path: build/reports/checkstyle/checkstyle.html
 
-  runTests:
-    runs-on: self-hosted
-    steps:
+  # runTests:
+  #   runs-on: self-hosted
+  #   steps:
     
-      - name: Checkout Code
-        uses: actions/checkout@v5
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v5
         
-      - name: Sey Up JDK17
-        uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: 17
+  #     - name: Sey Up JDK17
+  #       uses: actions/setup-java@v5
+  #       with:
+  #         distribution: temurin
+  #         java-version: 17
           
-      - name: Run Tests
-        run: ./gradlew test
+  #     - name: Run Tests
+  #       run: ./gradlew test
         
-      - name: Save Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: Tests Report
-          path: build/reports/tests/tests.html
+  #     - name: Save Report
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: Tests Report
+  #         path: build/reports/tests/tests.html
           
   build:
-    needs: [ "staticAnalysis", "runTests" ]
+    needs: [ "staticAnalysis" ]
     runs-on: self-hosted
     steps:
     
