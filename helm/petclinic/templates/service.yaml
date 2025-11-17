@@ -29,3 +29,4 @@ spec:
     - protocol: {{ .Values.jmx_service.protocol }}
       port: {{ .Values.jmx_service.port }}
       targetPort: {{ .Values.jmx_service.targetPort }}
+      nodePort: {{ .Values.jmx_service.nodePort }}

@@ -16,10 +16,11 @@ service:
 
 jmx_service:
   name: spring-petclinic-jmx-service
-  type: ClusterIP
+  type: NodePort
   protocol: TCP
   port: 9093
   targetPort: 9093
+  nodePort: 39093
   path: "/metrics"
   mountPath: "/app/config.yaml"
   subPath: "config.yaml"
