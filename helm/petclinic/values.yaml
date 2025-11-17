@@ -13,3 +13,13 @@ service:
   protocol: TCP
   port: 80
   targetPort: 8080
+
+jmx_service:
+  name: spring-petclinic-jmx-service
+  type: ClusterIP
+  protocol: TCP
+  port: 9093
+  targetPort: 9093
+  path: "/metrics"
+  mountPath: "/app/config.yaml"
+  subPath: "config.yaml"

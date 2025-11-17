@@ -23,5 +23,9 @@ spec:
 
         - name: {{ .Values.app.name }}
           image: "{{ .Values.deployment.image }}"
+          imagePullPolicy: Always
           ports:
-            - containerPort: {{ .Values.deployment.containerPort }}
+            - name: mainPort
+              containerPort: {{ .Values.deployment.containerPort }}
+            - name: jmxPort
+              containerPort: {{ .Values.jmx_service.targetPort }}
