@@ -30,8 +30,10 @@ spec:
             - name: jmx-port
               containerPort: {{ .Values.jmx_service.targetPort }}
           env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: mysql
             - name: MYSQL_DB_URL
-              value: {{ .Values.db.host }}
+              value: jdbc:mysql://{{ .Values.db.host }}:3306/dkop-dev-db
             - name: MYSQL_USER
               value: {{ .Values.db.user }}
             - name: MYSQL_PASSWORD
