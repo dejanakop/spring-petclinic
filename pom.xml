@@ -94,6 +94,17 @@
       <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>spring-cloud-gcp-dependencies</artifactId>
+      <version>4.1.4</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>spring-cloud-gcp-starter-sql-mysql</artifactId>
+    </dependency>
 
     <!-- Caching -->
     <dependency>
