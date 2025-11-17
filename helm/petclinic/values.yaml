@@ -20,7 +20,7 @@ jmx_service:
   protocol: TCP
   port: 9093
   targetPort: 9093
-  nodePort: 39093
+  nodePort: 30093
   path: "/metrics"
   mountPath: "/app/config.yaml"
   subPath: "config.yaml"
