@@ -34,3 +34,6 @@ spec:
               value: {{ .Values.db.user }}
             - name: MYSQL_PASSWORD
               value: {{ .Values.db.password }}
+          resources:
+            requests:
+              cpu: {{ .Values.deployment.cpu }}
