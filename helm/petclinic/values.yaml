@@ -6,7 +6,7 @@ deployment:
   image: ""
   replicas: 3
   containerPort: 8080
-  cpu: "900m"
+  cpu: "500m"
 
 service:
   name: spring-petclinic-service
