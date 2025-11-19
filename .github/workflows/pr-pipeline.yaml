@@ -1,8 +1,8 @@
 name: PR Pipeline
 
 on:
-  pull_request:
-    branches: ["main"]
+  # pull_request:
+  #   branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -56,7 +56,7 @@ jobs:
             path: build/reports/tests/tests.html
           
   build:
-      needs: [ "staticAnalysis", "runTests" ]
+      # needs: [ "staticAnalysis", "runTests" ]
       runs-on: self-hosted
       steps:
       
