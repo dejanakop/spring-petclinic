@@ -19,3 +19,9 @@ db:
   name: ""
   user: ""
   password: ""
+
+hpa:
+  name: spring-petclinic-hpa
+  minReplicas: 1
+  maxReplicas: 10
+  averageUtilization: 60
