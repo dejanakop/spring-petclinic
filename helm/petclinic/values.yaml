@@ -5,15 +5,18 @@ deployment:
   name: spring-petclinic-deployment
   image: ""
   replicas: 3
-  containerPort: 8080
+  httpPort: 8080
+  jmxPort: 9093
   cpu: "500m"
 
 service:
   name: spring-petclinic-service
   type: LoadBalancer
   protocol: TCP
-  port: 80
-  targetPort: 8080
+  httpPort: 80
+  httpTargetPort: 8080
+  jmxPort: 9093
+  jmxTargetPort: 9093
 
 db:
   url: ""
@@ -26,3 +29,8 @@ hpa:
   minReplicas: 1
   maxReplicas: 10
   averageUtilization: 60
+
+serviceMonitor:
+  name: spring-petclinic-service-monitor
+  port: metrics
+  interval: "30s"

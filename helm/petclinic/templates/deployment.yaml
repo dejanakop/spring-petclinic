@@ -24,7 +24,10 @@ spec:
         - name: {{ .Values.app.name }}
           image: "{{ .Values.deployment.image }}"
           ports:
-            - containerPort: {{ .Values.deployment.containerPort }}
+            - name: http
+              containerPort: {{ .Values.deployment.httpPort }}
+            - name: jmx
+              containerPort: {{ .Values.deployment.jmxPort }}
           env:
             - name: MYSQL_DB_URL
               value: {{ .Values.db.url }}
