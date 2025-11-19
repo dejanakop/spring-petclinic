@@ -7,7 +7,7 @@ deployment:
   replicas: 3
   httpPort: 8080
   jmxPort: 9093
-  cpu: "500m"
+  cpu: "100m"
 
 service:
   name: spring-petclinic-service
