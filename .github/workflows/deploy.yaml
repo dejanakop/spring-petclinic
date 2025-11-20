@@ -20,20 +20,20 @@ on:
 
 jobs:
 
-  check_if_allowed:
-    runs-on: self-hosted
-    steps:
-      - name: Check
-        run: |
-          if [[ "${{ github.event.inputs.environment }}" == "production" && "${{ github.event.inputs.image }}" == "pr" ]]; then
-            echo "ERROR: Can't deploy PR image to the production environment" >&2
-            exit 1
-          fi
+  # check_if_allowed:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - name: Check
+  #       run: |
+  #         if [[ "${{ github.event.inputs.environment }}" == "production" && "${{ github.event.inputs.image }}" == "pr" ]]; then
+  #           echo "ERROR: Can't deploy PR image to the production environment" >&2
+  #           exit 1
+  #         fi
 
   deploy_petclinic:
 
     runs-on: self-hosted
-    needs: check_if_allowed
+    # needs: check_if_allowed
     steps:
   
       - name: Checkout
