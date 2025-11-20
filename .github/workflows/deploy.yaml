@@ -61,6 +61,7 @@ jobs:
       - name: Install Chart
         run: |
           IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.MAIN_REPO }}/spring-petclinic:${{ steps.get_tag.outputs.tag }}"
+          helm dependency build ./helm/petclinic/
           helm upgrade --install petclinic ./helm/petclinic/ \
             --set deployment.image=$IMAGE \
             --set db.url=${{ secrets.DB_HOST }} \

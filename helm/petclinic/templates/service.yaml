@@ -3,12 +3,17 @@ kind: Service
 
 metadata: 
   name: {{ .Values.service.name }}
+  labels:
+    app: {{ .Values.app.name }}
   
 spec:
   type: {{ .Values.service.type }}
   selector:
     app: {{ .Values.app.name }}
   ports:
-    - protocol: {{ .Values.service.protocol }}
-      port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.targetPort }}
+    - name: http
+      port: {{ .Values.service.httpPort }}
+      targetPort: {{ .Values.service.httpTargetPort }}
+    - name: jmx
+      port: {{ .Values.service.jmxPort }}
+      targetPort: {{ .Values.service.jmxTargetPort }}
