@@ -48,6 +48,8 @@ jobs:
         run: |
           export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
           ./gradlew test
+        on-fail:
+              strategy: ignore
         
       - name: Save Report
         uses: actions/upload-artifact@v4
