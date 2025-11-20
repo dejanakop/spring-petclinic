@@ -23,15 +23,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get Git Tag
-        id: get_tag
-        run: |
-          tag=$( (git ls-remote --tags --sort=v:refname origin | tail -1 | awk -F/ '{print $3}') || echo "" )
-          if [[ "${tag}" == "" ]]; then
-            exit 1
-          fi
-          echo "tag=${tag}" >> $GITHUB_OUTPUT
-
       - name: Authenticate
         uses: google-github-actions/auth@v2
         with:
@@ -60,7 +51,11 @@ jobs:
       
       - name: Install Chart
         run: |
-          IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.MAIN_REPO }}/spring-petclinic:${{ steps.get_tag.outputs.tag }}"
+          if [[ "${{ github.event.inputs.environment }}" == "production" ]]; then
+            IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.MAIN_REPO }}/spring-petclinic:latest"
+          else
+            IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:latest"
+          fi
           helm dependency build ./helm/petclinic/
           helm upgrade --install petclinic ./helm/petclinic/ \
             --set deployment.image=$IMAGE \

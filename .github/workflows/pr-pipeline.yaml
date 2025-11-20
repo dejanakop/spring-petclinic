@@ -1,8 +1,8 @@
 name: PR Pipeline
 
 on:
-  # pull_request:
-  #   branches: ["main"]
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -32,53 +32,53 @@ jobs:
           path: build/reports/checkstyle/checkstyle.html
 
   runTests:
-      runs-on: self-hosted
-      steps:
-      
-        - name: Checkout Code
-          uses: actions/checkout@v5
+    runs-on: self-hosted
+    steps:
+    
+      - name: Checkout Code
+        uses: actions/checkout@v5
+        
+      - name: Sey Up JDK17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
           
-        - name: Sey Up JDK17
-          uses: actions/setup-java@v5
-          with:
-            distribution: temurin
-            java-version: 17
-            
-        - name: Run Tests
-          run: |
-            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-            ./gradlew test
-          
-        - name: Save Report
-          uses: actions/upload-artifact@v4
-          with:
-            name: Tests Report
-            path: build/reports/tests/tests.html
+      - name: Run Tests
+        run: |
+          export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+          ./gradlew test
+        
+      - name: Save Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Tests Report
+          path: build/reports/tests/tests.html
           
   build:
-      # needs: [ "staticAnalysis", "runTests" ]
-      runs-on: self-hosted
-      steps:
-      
-        - name: Checkout Code
-          uses: actions/checkout@v5
+    needs: [ "staticAnalysis", "runTests" ]
+    runs-on: self-hosted
+    steps:
+    
+      - name: Checkout Code
+        uses: actions/checkout@v5
+        
+      - name: Sey Up JDK17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
           
-        - name: Sey Up JDK17
-          uses: actions/setup-java@v5
-          with:
-            distribution: temurin
-            java-version: 17
-            
-        - name: Build
-          run: |
-            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-            ./gradlew build -x checkstyleMain -x test
-          
-        - name: Save .jar file
-          uses: actions/upload-artifact@v4
-          with:
-            name: Spring Petclinic JAR
-            path: build/libs/*.jar
+      - name: Build
+        run: |
+          export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+          ./gradlew build -x checkstyleMain -x test
+        
+      - name: Save .jar file
+        uses: actions/upload-artifact@v4
+        with:
+          name: Spring Petclinic JAR
+          path: build/libs/*.jar
 
   dockerImage:
     needs: [ "build" ]
@@ -113,5 +113,9 @@ jobs:
 
       - name: Push Docker image to GCP Artifact Registry
         run: |
+          # Tag = commit sha
           docker tag spring-petclinic:${{ github.sha }} ${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:${{ github.sha }}
           docker push ${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:${{ github.sha }}
+          # Tag = latest
+          docker tag spring-petclinic:${{ github.sha }} ${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:latest
+          docker push ${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:latest
