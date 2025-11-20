@@ -33,6 +33,7 @@ jobs:
   deploy_petclinic:
 
     runs-on: self-hosted
+    needs: check_if_allowed
     steps:
   
       - name: Checkout
