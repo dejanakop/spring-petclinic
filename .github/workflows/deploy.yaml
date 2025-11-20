@@ -3,8 +3,15 @@ name: Deploy App
 on:
   workflow_dispatch:
     inputs:
+      image:
+        description: 'Image'
+        required: true
+        type: choice
+        options:
+          - 'pr'
+          - 'main'
       environment:
-        description: 'Target environment'
+        description: 'Environment'
         required: true
         type: choice
         options:
@@ -12,6 +19,16 @@ on:
           - 'production'
 
 jobs:
+
+  check_if_allowed:
+    runs-on: self-hosted
+    steps:
+      - name: Check
+        run: |
+          if [[ "${{ github.event.inputs.environment }}" == "production" && "${{ github.event.inputs.image }}" == "pr" ]]; then
+            echo "ERROR: Can't deploy PR image to the production environment" > &2
+            exit 1
+          fi
 
   deploy_petclinic:
 
@@ -35,7 +52,11 @@ jobs:
 
       - name: Configure GKE credentials
         run: |
-          gcloud container clusters get-credentials ${{ secrets.CLUSTER_NAME }} --zone ${{ secrets.ZONE }}
+          if [[ "${{ github.event.inputs.environment }}" == "production" ]]; then
+            gcloud container clusters get-credentials ${{ secrets.MAIN_CLUSTER_NAME }} --zone ${{ secrets.ZONE }}
+          else
+            gcloud container clusters get-credentials ${{ secrets.DEV_CLUSTER_NAME }} --zone ${{ secrets.ZONE }}
+          fi
 
       - name: Install kubectl
         run: gcloud components install kubectl
@@ -51,7 +72,7 @@ jobs:
       
       - name: Install Chart
         run: |
-          if [[ "${{ github.event.inputs.environment }}" == "production" ]]; then
+          if [[ "${{ github.event.inputs.image }}" == "main" ]]; then
             IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.MAIN_REPO }}/spring-petclinic:latest"
           else
             IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:latest"
