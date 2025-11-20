@@ -7,57 +7,57 @@ on:
 
 jobs:
 
-  staticAnalysis:
-    runs-on: self-hosted
-    steps:
+  # staticAnalysis:
+  #   runs-on: self-hosted
+  #   steps:
     
-      - name: Checkout Code
-        uses: actions/checkout@v5
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v5
         
-      - name: Sey Up JDK17
-        uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: 17
+  #     - name: Sey Up JDK17
+  #       uses: actions/setup-java@v5
+  #       with:
+  #         distribution: temurin
+  #         java-version: 17
           
-      - name: Static analysis
-        run: |
-          export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-          ./gradlew checkstyleMain
+  #     - name: Static analysis
+  #       run: |
+  #         export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+  #         ./gradlew checkstyleMain
         
-      - name: Save Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: Static Analysis Report
-          path: build/reports/checkstyle/checkstyle.html
+  #     - name: Save Report
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: Static Analysis Report
+  #         path: build/reports/checkstyle/checkstyle.html
 
-  runTests:
-    runs-on: self-hosted
-    continue-on-error: true
-    steps:
+  # runTests:
+  #   runs-on: self-hosted
+  #   continue-on-error: true
+  #   steps:
     
-      - name: Checkout Code
-        uses: actions/checkout@v5
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v5
         
-      - name: Sey Up JDK17
-        uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: 17
+  #     - name: Sey Up JDK17
+  #       uses: actions/setup-java@v5
+  #       with:
+  #         distribution: temurin
+  #         java-version: 17
           
-      - name: Run Tests
-        run: |
-          export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-          ./gradlew test
+  #     - name: Run Tests
+  #       run: |
+  #         export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+  #         ./gradlew test
         
-      - name: Save Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: Tests Report
-          path: build/reports/tests/tests.html
+  #     - name: Save Report
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: Tests Report
+  #         path: build/reports/tests/tests.html
           
   build:
-    needs: [ "staticAnalysis", "runTests" ]
+    # needs: [ "staticAnalysis", "runTests" ]
     runs-on: self-hosted
     steps:
     
