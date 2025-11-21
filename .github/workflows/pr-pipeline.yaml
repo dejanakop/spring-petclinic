@@ -7,6 +7,17 @@ on:
 
 jobs:
 
+  createTag:
+    runs-on: self-hosted
+    outputs:
+      TAG: ${{ steps.createTag.outputs.TAG }}
+    steps:
+      - name: Create Tag From A Commit Hash
+        run: |
+          TAG=${{ github.sha }}
+          TAG=${TAG:0:6}
+          echo "TAG=${TAG}" >> $GITHUB_OUTPUT
+
   # staticAnalysis:
   #   runs-on: self-hosted
   #   steps:
@@ -82,7 +93,7 @@ jobs:
           path: build/libs/*.jar
 
   dockerImage:
-    needs: [ "build" ]
+    needs: [ "createTag", "build" ]
     runs-on: self-hosted
     steps:
 
@@ -96,12 +107,12 @@ jobs:
           path: .
 
       - name: Build Docker Image
-        run: docker build -t spring-petclinic:${{ github.sha }} .
+        run: docker build -t spring-petclinic:${{ needs.createTag.outputs.TAG }} .
 
       - name: Trivy Scan
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: spring-petclinic:${{ github.sha }}
+          image-ref: spring-petclinic:${{ needs.createTag.outputs.TAG }}
           format: 'table'
 
       - name: Authenticate with GCP
@@ -115,8 +126,8 @@ jobs:
       - name: Push Docker image to GCP Artifact Registry
         run: |
           # Tag = commit sha
-          docker tag spring-petclinic:${{ github.sha }} ${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:${{ github.sha }}
-          docker push ${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:${{ github.sha }}
+          docker tag spring-petclinic:${{ needs.createTag.outputs.TAG }} ${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:${{ needs.createTag.outputs.TAG }}
+          docker push ${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:${{ needs.createTag.outputs.TAG }}
           # Tag = latest
-          docker tag spring-petclinic:${{ github.sha }} ${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:latest
+          docker tag spring-petclinic:${{ needs.createTag.outputs.TAG }} ${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:latest
           docker push ${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:latest
