@@ -6,6 +6,12 @@ metadata:
 
 spec:
 
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: {{ .Values.deployment.maxUnavailable }}
+      maxSurge: {{ .Values.deployment.maxSurge }}
+
   replicas: {{ .Values.deployment.replicas }}
 
   selector:
