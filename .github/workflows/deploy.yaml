@@ -78,11 +78,18 @@ jobs:
           else
             IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:latest"
           fi
+
+          if [[ "${{ github.event.inputs.environment }}" == "production" ]]; then
+            DB_NAME=${{ secrets.PRODUCTION_DB_NAME }}
+          else
+            DB_NAME=${{ secrets.DEV_DB_NAME }}
+          fi
+          
           helm dependency build ./helm/petclinic/
           helm upgrade --install petclinic ./helm/petclinic/ \
             --set deployment.image=$IMAGE \
             --set db.url=${{ secrets.DB_HOST }} \
-            --set db.name=${{ secrets.DB_NAME }} \
+            --set db.name=$DB_NAME \
             --set db.user=${{ secrets.DB_USER }} \
             --set db.password=${{ secrets.DB_PASSWORD }}
 
