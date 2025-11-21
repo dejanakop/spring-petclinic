@@ -8,6 +8,8 @@ deployment:
   httpPort: 8080
   jmxPort: 9093
   cpu: "100m"
+  maxUnavailable: 20%
+  maxSurge: 20%
 
 service:
   name: spring-petclinic-service
