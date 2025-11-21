@@ -13,9 +13,10 @@ jobs:
       TAG: ${{ steps.createTag.outputs.TAG }}
     steps:
       - name: Create Tag From A Commit Hash
+        id: createTag
         run: |
           TAG=${{ github.sha }}
-          TAG=${TAG:0:6}
+          TAG=${TAG:0:7}
           echo "TAG=${TAG}" >> $GITHUB_OUTPUT
 
   # staticAnalysis:
