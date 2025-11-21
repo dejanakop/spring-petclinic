@@ -10,6 +10,10 @@ on:
         options:
           - 'pr'
           - 'main'
+      tag:
+        description: 'Tag'
+        type: string
+        default: 'latest'
       environment:
         description: 'Environment'
         required: true
@@ -73,10 +77,11 @@ jobs:
       
       - name: Install Chart
         run: |
+          TAG="${{ github.event.inputs.tag }}"
           if [[ "${{ github.event.inputs.image }}" == "main" ]]; then
-            IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.MAIN_REPO }}/spring-petclinic:latest"
+            IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.MAIN_REPO }}/spring-petclinic:${TAG}"
           else
-            IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:latest"
+            IMAGE="${{ vars.REGION }}-docker.pkg.dev/${{ secrets.PROJECT }}/${{ secrets.PR_REPO }}/spring-petclinic:${TAG}"
           fi
 
           if [[ "${{ github.event.inputs.environment }}" == "production" ]]; then
