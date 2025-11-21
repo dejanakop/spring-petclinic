@@ -23,6 +23,7 @@ spec:
 
         - name: {{ .Values.app.name }}
           image: "{{ .Values.deployment.image }}"
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: {{ .Values.deployment.httpPort }}
