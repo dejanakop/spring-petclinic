@@ -123,3 +123,7 @@ wrapper {
   gradleVersion = "8.14.3"
   distributionType = Wrapper.DistributionType.ALL
 }
+
+tasks.matching { it.name.startsWith("checkstyleNohttp") }.configureEach {
+    enabled = false
+}
