@@ -49,3 +49,48 @@ serviceMonitor:
   name: spring-petclinic-service-monitor
   port: metrics
   interval: "30s"
+
+# PROMETHEUS
+
+myRegistry: ""
+
+prometheus:
+
+  configmapReload:
+    prometheus:
+      image:
+        repository: "{{ myRegistry }}/prometheus/prometheus-config-reloader"
+        tag: "v0.86.1"
+
+  server:
+    image:
+      repository: "{{ myRegistry }}/prometheus/prometheus"
+      tag: "v3.7.3"
+
+  alertmanager:
+    image:
+      repository: "{{ myRegistry }}/prometheus/alertmanager"
+      tag: "v0.29.0"
+    configmapReload:
+      prometheus:
+        image:
+          repository: "{{ myRegistry }}/prometheus/prometheus-config-reloader"
+          tag: "v3.7.3"
+
+  kube-state-metrics:
+    image:
+      registry: "{{ myRegistry }}"
+      repository: "prometheus/kube-state-metrics"
+      tag: "v2.17.0"
+
+  prometheus-node-exporter:
+    image:
+      registry: "{{ myRegistry }}"
+      repository: "prometheus/node-exporter"
+      tag: "v1.10.2"
+
+  prometheus-pushgateway:
+    image:
+      registry: "{{ myRegistry }}"
+      repository: "prometheus/pushgateway"
+      tag: "v1.11.2"
