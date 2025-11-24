@@ -50,4 +50,4 @@ spec:
               memory: {{ .Values.deployment.requests.memory }}
             limits:
               cpu: {{ .Values.deployment.limits.cpu }}
-              cpu: {{ .Values.deployment.limits.memory }}
+              memory: {{ .Values.deployment.limits.memory }}
