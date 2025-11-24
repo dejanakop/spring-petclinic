@@ -51,3 +51,12 @@ spec:
             limits:
               cpu: {{ .Values.deployment.limits.cpu }}
               memory: {{ .Values.deployment.limits.memory }}
+          readinessProbe:
+            enabled: true
+            initialDelaySeconds: {{ .Values.deployment.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.deployment.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.deployment.readinessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.deployment.readinessProbe.timeoutSeconds }}
+            httpGet:
+              path: {{ .Values.deployment.readinessProbe.httpGet.path }}
+              port: {{ .Values.deployment.readinessProbe.httpGet.port }}
