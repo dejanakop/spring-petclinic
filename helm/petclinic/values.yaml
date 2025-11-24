@@ -35,7 +35,6 @@ service:
 
 db:
   url: ""
-  name: ""
   user: ""
   password: ""
 

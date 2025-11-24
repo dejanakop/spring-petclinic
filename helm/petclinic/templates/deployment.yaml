@@ -38,8 +38,6 @@ spec:
           env:
             - name: MYSQL_DB_URL
               value: {{ .Values.db.url }}
-            - name: MYSQL_DB_NAME
-              value: {{ .Values.db.name }}
             - name: MYSQL_USER
               value: {{ .Values.db.user }}
             - name: MYSQL_PASSWORD

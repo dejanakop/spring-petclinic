@@ -93,8 +93,7 @@ jobs:
           helm dependency build ./helm/petclinic/
           helm upgrade --install petclinic ./helm/petclinic/ \
             --set deployment.image=$IMAGE \
-            --set db.url=${{ secrets.DB_HOST }} \
-            --set db.name=$DB_NAME \
+            --set db.url=${{ secrets.DB_URL }} \
             --set db.user=${{ secrets.DB_USER }} \
             --set db.password=${{ secrets.DB_PASSWORD }}
 
