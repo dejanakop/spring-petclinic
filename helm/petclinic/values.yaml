@@ -49,3 +49,46 @@ serviceMonitor:
   name: spring-petclinic-service-monitor
   port: metrics
   interval: "30s"
+
+# PROMETHEUS
+
+prometheus:
+
+  configmapReload:
+    prometheus:
+      image:
+        repository: "europe-west1-docker.pkg.dev/erudite-cyclist-476707-s9/prometheus/prometheus-config-reloader"
+        tag: "v0.86.1"
+
+  server:
+    image:
+      repository: "europe-west1-docker.pkg.dev/erudite-cyclist-476707-s9/prometheus/prometheus"
+      tag: "v3.7.3"
+
+  alertmanager:
+    image:
+      repository: "europe-west1-docker.pkg.dev/erudite-cyclist-476707-s9/prometheus/alertmanager"
+      tag: "v0.29.0"
+    configmapReload:
+      prometheus:
+        image:
+          repository: "europe-west1-docker.pkg.dev/erudite-cyclist-476707-s9/prometheus/prometheus-config-reloader"
+          tag: "v3.7.3"
+
+  kube-state-metrics:
+    image:
+      registry: "europe-west1-docker.pkg.dev/erudite-cyclist-476707-s9"
+      repository: "prometheus/kube-state-metrics"
+      tag: "v2.17.0"
+
+  prometheus-node-exporter:
+    image:
+      registry: "europe-west1-docker.pkg.dev/erudite-cyclist-476707-s9"
+      repository: "prometheus/node-exporter"
+      tag: "v1.10.2"
+
+  prometheus-pushgateway:
+    image:
+      registry: "europe-west1-docker.pkg.dev/erudite-cyclist-476707-s9"
+      repository: "prometheus/pushgateway"
+      tag: "v1.11.2"
