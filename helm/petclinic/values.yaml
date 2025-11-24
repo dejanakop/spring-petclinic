@@ -7,7 +7,12 @@ deployment:
   replicas: 3
   httpPort: 8080
   jmxPort: 9093
-  cpu: "100m"
+  requests:
+    cpu: "500m"
+    memory: "512Mi"
+  limits:
+    cpu: "1000m"
+    memory: "1Gi"
   maxUnavailable: 20%
   maxSurge: 20%
 
