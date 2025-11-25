@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Values.app.name }}-grafana-dashboards"
+  labels:
+    dashboard-provider: default
+data:
+  kubernetes.json: |
+{{ .Files.Get "files/dashboards/kubernetes-dashboard.json" | indent 4 }}
