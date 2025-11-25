@@ -78,6 +78,7 @@ grafana:
       enabled: true
       label: grafana_dashboard
       folder: /var/lib/grafana/dashboards
+      searchNamespace: ALL
   dashboardProviders:
     dashboardproviders.yaml:
       apiVersion: 1
