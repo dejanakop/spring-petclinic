@@ -53,8 +53,7 @@ serviceMonitor:
 # PROMETHEUS
 
 grafana:
-  admin:
-    password: ""
+  adminPassword: ""
   service:
     type: LoadBalancer
   datasources:

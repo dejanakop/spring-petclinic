@@ -92,7 +92,7 @@ jobs:
           
           helm dependency build ./helm/petclinic/
           helm upgrade --install petclinic ./helm/petclinic/ \
-            --set grafana.admin.password=${{ secrets.GRAFANA_PASSWORD }} \
+            --set grafana.adminPassword=${{ secrets.GRAFANA_PASSWORD }} \
             --set deployment.image=$IMAGE \
             --set db.url=${{ secrets.DB_HOST }} \
             --set db.name=$DB_NAME \
