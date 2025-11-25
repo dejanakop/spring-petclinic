@@ -72,6 +72,7 @@ grafana:
   sidecar:
     dashboards:
       enabled: true
+      searchNamespace: ALL
   dashboardProviders:
     dashboardproviders.yaml:
       apiVersion: 1
