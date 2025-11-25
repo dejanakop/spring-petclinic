@@ -71,7 +71,7 @@ grafana:
             timeInterval: "5s"
   sidecar:
     image:
-      repository: "kiwigrid/k8s-sidecar"
+      repository: "docker.io/kiwigrid/k8s-sidecar"
       tag: "1.30.10"
     dashboards:
       enabled: true
