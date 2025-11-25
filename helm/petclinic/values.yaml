@@ -70,9 +70,9 @@ grafana:
           jsonData:
             timeInterval: "5s"
   sidecar:
-    # image:
-    #   repository:
-    #   tag: 
+    image:
+      repository: "kiwigrid/k8s-sidecar:1.30.10"
+      tag: "1.30.10"
     dashboards:
       enabled: true
       label: grafana_dashboard
