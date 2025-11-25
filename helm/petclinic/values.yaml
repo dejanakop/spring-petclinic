@@ -52,6 +52,32 @@ serviceMonitor:
 
 # PROMETHEUS
 
+grafana:
+  adminPassword: ""
+  service:
+    type: LoadBalancer
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          url: http://petclinic-prometheus-server
+          isDefault: true
+          version: 1
+          editable: true
+          jsonData:
+            timeInterval: "5s"
+  sidecar:
+    image:
+      registry: "europe-west1-docker.pkg.dev/erudite-cyclist-476707-s9"
+      repository: "grafana/k8s-sidecar"
+      tag: "1.30.10"
+    dashboards:
+      enabled: true
+      searchNamespace: ALL
+
 prometheus:
 
   configmapReload:
