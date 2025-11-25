@@ -71,7 +71,7 @@ grafana:
             timeInterval: "5s"
   sidecar:
     image:
-      registry: "europe-west1-docker.pkg.dev/erudite-cyclist-476707-s9/"
+      registry: "europe-west1-docker.pkg.dev/erudite-cyclist-476707-s9"
       repository: "grafana/k8s-sidecar"
       tag: "1.30.10"
     dashboards:
