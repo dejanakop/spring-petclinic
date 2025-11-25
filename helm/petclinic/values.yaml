@@ -77,6 +77,15 @@ grafana:
     dashboards:
       enabled: true
       label: grafana_dashboard
+      folder: /var/lib/grafana/dashboards
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+        - name: 'default'
+          type: file
+          options:
+            path: /var/lib/grafana/dashboards
 
 prometheus:
 
