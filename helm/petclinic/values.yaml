@@ -56,7 +56,6 @@ grafana:
   service:
     type: LoadBalancer
   datasources:
-    enabled: true
     datasources.yaml:
       apiVersion: 1
       datasources:
