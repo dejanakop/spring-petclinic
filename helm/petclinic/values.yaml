@@ -69,6 +69,9 @@ grafana:
           editable: true
           jsonData:
             timeInterval: "5s"
+  sidecar:
+    dashboards:
+      enabled: true
   dashboardProviders:
     dashboardproviders.yaml:
       apiVersion: 1
@@ -76,7 +79,7 @@ grafana:
         - name: 'default'
           type: file
           options:
-            path: /var/lib/grafana/dashboards/default
+            path: /var/lib/grafana/dashboards
 
 prometheus:
 
