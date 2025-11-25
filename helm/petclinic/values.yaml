@@ -76,17 +76,7 @@ grafana:
       tag: "1.30.10"
     dashboards:
       enabled: true
-      label: grafana_dashboard
-      folder: /var/lib/grafana/dashboards
       searchNamespace: ALL
-  dashboardProviders:
-    dashboardproviders.yaml:
-      apiVersion: 1
-      providers:
-        - name: 'default'
-          type: file
-          options:
-            path: /var/lib/grafana/dashboards
 
 prometheus:
 
