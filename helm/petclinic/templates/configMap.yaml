@@ -4,7 +4,6 @@ metadata:
   name: "{{ .Values.app.name }}-grafana-dashboards"
   labels:
     grafana-dashboard: "1"
-    dashboard-provider: default
 data:
   kubernetes.json: |
 {{ .Files.Get "dashboards/kubernetes-dashboard.json" | indent 4 }}
