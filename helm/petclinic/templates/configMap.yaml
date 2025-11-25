@@ -6,4 +6,4 @@ metadata:
     dashboard-provider: default
 data:
   kubernetes.json: |
-{{ .Files.Get "files/dashboards/kubernetes-dashboard.json" | indent 4 }}
+{{ .Files.Get "dashboards/kubernetes-dashboard.json" | indent 4 }}
