@@ -85,7 +85,7 @@ grafana:
     default:
       kubernetes:
         json: |
-          ${indent(8, file("${path.module}/dashboards/kubernetes-dashboard.json"))}
+          {{ .Files.Get "dashboards/kubernetes-dashboard.json" }}
 
 prometheus:
 
