@@ -77,7 +77,7 @@ grafana:
     dashboards:
       enabled: true
       searchNamespace: ALL
-      labelValue: 1
+      labelValue: "1"
 
 prometheus:
 
