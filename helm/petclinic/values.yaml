@@ -78,6 +78,7 @@ grafana:
       enabled: true
       searchNamespace: ALL
       labelValue: "1"
+      label: "grafana_dashboard"
 
 prometheus:
 
